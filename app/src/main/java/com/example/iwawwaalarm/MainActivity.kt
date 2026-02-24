@@ -12,6 +12,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
         if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            Toast.makeText(this, "Выберите высокий приоритет питания чтобы сервис не засыпал", Toast.LENGTH_LONG).show()
             val intent = Intent()
             intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
             intent.data = Uri.parse("package:$packageName")
@@ -102,6 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (!Settings.canDrawOverlays(this)) {
+            Toast.makeText(this, "Предоставьте доступ к фуллскрин оверлэю", Toast.LENGTH_LONG).show()
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:$packageName"))
             startActivity(intent)
@@ -115,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) !=
                 PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Предоставьте разрешение на уведомления", Toast.LENGTH_LONG).show()
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 101)
             }
         }
