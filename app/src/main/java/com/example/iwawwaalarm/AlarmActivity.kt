@@ -1,5 +1,6 @@
 package com.example.iwawwaalarm
 
+import android.app.KeyguardManager
 import android.app.NotificationManager
 import android.app.TimePickerDialog
 import android.content.Context
@@ -8,6 +9,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -42,11 +44,21 @@ class AlarmActivity : AppCompatActivity() {
             return
         }
 
-        // Магия для Android 8.0: просыпаемся и показываемся над замком
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+        // Специально для Xiaomi/Android 10+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            keyguardManager.requestDismissKeyguard(this, null)
+        } else {
+            @Suppress("DEPRECATION")
+            window.addFlags(
                 WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+            )
+        }
 
         setContentView(R.layout.activity_alarm)
 
