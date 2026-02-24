@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.IwawwaAlarm" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Обязательные атрибуты для Material3 -->
+        <item name="colorPrimary">#E94560</item>
+        <item name="colorSecondary">#0F3460</item>
+    </style>
+</resources>

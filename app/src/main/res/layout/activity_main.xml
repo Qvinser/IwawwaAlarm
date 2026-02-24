@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#1F1F1F"
+    tools:context=".MainActivity">
+
+    <!-- 1. ЗАГОЛОВОК (вверху по центру) -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/main_header"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/monitorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvStatus"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Включить сервис"
+            android:textColor="#E94560"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="#FFFFFF"
+            app:trackTint="@color/switch_track_selector"/>
+    </LinearLayout>
+
+    <!-- 3. ТЕКСТ ВЫБОРА ВРЕМЕНИ (под карточкой) -->
+    <TextView
+        android:id="@+id/tvTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/monitorLayout"
+        android:layout_marginTop="32dp"
+        android:text="Разрешенное время:"
+        android:textColor="#99FFFFFF" />
+
+    <!-- 4. КНОПКИ ВРЕМЕНИ (под текстом) -->
+    <LinearLayout
+        android:id="@+id/llTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTimeLabel"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStartTime"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="08:00"
+            app:strokeColor="#E94560"
+            app:backgroundTint="#2F2E2E"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="—"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEndTime"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="23:00"
+            app:strokeColor="#E94560"
+            app:backgroundTint="#2F2E2E"/>
+    </LinearLayout>
+
+    <!-- 5. ТЕСТОВАЯ КНОПКА (прижата к низу экрана) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/testAlarm"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:text="Тест будильника"
+        app:backgroundTint="#E94560"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
